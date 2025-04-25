@@ -1,0 +1,71 @@
+// Abstract class
+abstract class Employee {
+    String name;
+    int id;
+
+    // Constructor
+    Employee(String name, int id) {
+        this.name = name;
+        this.id = id;
+    }
+
+    // Abstract method
+    abstract double calculateSalary();
+
+    // Display method
+    void displayInfo() {
+        System.out.println("Name: " + name + ", ID: " + id);
+    }
+}
+
+// Full-time employee class
+class FullTimeEmployee extends Employee {
+    double monthlySalary;
+
+    FullTimeEmployee(String name, int id, double monthlySalary) {
+        super(name, id);
+        this.monthlySalary = monthlySalary;
+    }
+
+    @Override
+    double calculateSalary() {
+        return monthlySalary;
+    }
+}
+
+// Part-time employee class
+class PartTimeEmployee extends Employee {
+    double hourlyRate;
+    int hoursWorked;
+
+    PartTimeEmployee(String name, int id, double hourlyRate, int hoursWorked) {
+        super(name, id);
+        this.hourlyRate = hourlyRate;
+        this.hoursWorked = hoursWorked;
+    }
+
+    @Override
+    double calculateSalary() {
+        return hourlyRate * hoursWorked;
+    }
+}
+
+// Main class
+public class EmployeeTest {
+    public static void main(String[] args) {
+        Employee emp1 = new FullTimeEmployee("Alice", 101, 50000);
+        Employee emp2 = new PartTimeEmployee("Bob", 102, 200, 20);
+
+        emp1.displayInfo();
+        System.out.println("Salary: " + emp1.calculateSalary());
+
+        emp2.displayInfo();
+        System.out.println("Salary: " + emp2.calculateSalary());
+    }
+}
+
+Output:
+Name: Alice, ID: 101
+Salary: 50000.0
+Name: Bob, ID: 102
+Salary: 4000.0
